@@ -1,13 +1,19 @@
 import React from 'react';
+import Card from './card.js';
 
-class Cards extends React.Component {
-  render() {
-    return (
-      <div>
-        <p>This is the cards component</p>
-      </div>
-    );
-  }
-}
+const Cards = (props) => {
+  return (
+    <div>
+      {
+        props.colors.map((color) => (
+          <Card
+            key={color}
+          />
+        ))
+      }
+    </div>
+
+  );
+};
 
 export default Cards;
