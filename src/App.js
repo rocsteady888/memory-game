@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Card from "./components/card.js";
-import Cards from "./components/cards.js";
 
 class App extends Component {
   constructor(props) {
@@ -10,19 +9,33 @@ class App extends Component {
       colors: props.colors
     };
   }
+
   render() {
     return (
       <div className="App">
-        <Cards 
-          colors={this.state.colors}
-        />
+        {
+          this.state.colors.map((color) => (
+            <div>
+              <Card
+                key={(color) => (color + '1')}
+                colorText={color}
+                bgColor={color}
+              />
+              <Card
+                key={(color) => (color + '2')}
+                colorText={color}
+                bgColor={color}
+              />
+            </div>
+          ))
+        }
       </div>
     );
   }
 }
 
 App.defaultProps = {
-  colors: ['red', 'blue', 'yellow', 'green', 'purple']
+  colors: ['red', 'blue', 'yellow', 'green', 'purple', 'magenta', "orange", "salmon", "indigo", "lightblue", "pink"]
 }
 
 export default App;
