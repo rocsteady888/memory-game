@@ -3,8 +3,7 @@ import React from 'react';
 class Card extends React.Component {
   constructor(props) {
     super(props);
-    this.selectColor = this.selectColor.bind(this);
-    // this.handlePick = this.handlePick.bind(this);
+    this.handlePick = this.handlePick.bind(this)
     this.state = {
       //reveals the color
       showColor: false,
@@ -14,50 +13,27 @@ class Card extends React.Component {
       selectedColor: props.selectedColor
     }
   }
-  //when a user clicks on a card that cards info is stored in array 
-  selectColor(props) {
-    console.log(this.state.bgColor);
-    let colorSearch = this.state.selectedColor.indexOf(this.state.bgColor);
-    let colorArrLen = this.state.selectedColor.length;
-    console.log(colorSearch);
-    console.log(colorArrLen);
-    if ( colorArrLen < 1 & colorSearch < 0 ) {
-      console.log('first guess, add to array');
-      this.setState((prevState) => {
-        return {
-          showColor: !this.state.showColor,
-          selectedColor: this.state.selectedColor.push(this.state.bgColor)
-        };
-      });
-    } else if ( colorArrLen = 1 & colorSearch > -1 ) {
-      console.log('matched!');
-      this.setState((prevState) => {
-        return {
-          showColor: !this.state.showColor,
-          selectedColor: []
-        };
-      });
-    } else if ( colorArrLen = 1 & colorSearch < 0 ) {
-      console.log('not a match');
-      this.setState((prevState) => {
-        return {
-          showColor: !this.state.showColor,
-          selectedColor: []
-        };
-      });
-    } else {
-      console.log('something else happened');
+  handlePick() {
+    if ( this.state.count === 0 ) {
+      console.log('keep playing');
+    } else if ( this.state.count > 0 ) {
+      console.log('you lose ');
     }
+    this.setState((prevState) => {
+      return {
+        count: prevState.count + 1
+      };
+    });
   }
   render() {
     return (
       <div>
         <div 
         className='card' 
-        style={{ backgroundColor: this.state.showColor ? this.state.bgColor : "gray" }} 
-        onClick={this.selectColor}
+        style={{backgroundColor:this.state.bgColor}}
+        onClick={this.handlePick}
         >
-          <h2 className='clickCounter'>Click Counter: {this.props.count}</h2>
+          <h2 className='clickCounter'>Click Counter: {this.state.count}</h2>
           <h2 className='clickCounter'>{this.state.bgColor}</h2>
         </div>
         <br />
